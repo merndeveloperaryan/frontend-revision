@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <div class="h-screen w-screen">
+        <div class="nav h-[10vh] w-full bg-zinc-600 flex justify-center items-center gap-10">
+            <h3 class="cursor-pointer text-zinc-100">Home</h3>
+            <h3 class="cursor-pointer text-zinc-100">About</h3>
+            <h3 class="cursor-pointer text-zinc-100">Contact</h3>
+        </div>
+        <div class="content w-full h-[90vh] bg-zinc-800 flex justify-center items-center gap-10 p-5">
+            <div
+                class="home h-1/2 w-1/3 border-2 border-zinc-600 p-10 text-zinc-300 rounded-lg flex flex-col justify-center items-center">
+
+                <div id="bar" class="w-44 h-2 rounded-full border-2 border-white hidden">
+                    <div id="progress" class="w-0 h-full rounded-full bg-green-400"></div>
+                </div>
+                <div>
+                    <p></p>
+                </div>
+                <div class="my-5">
+                    <button id="start" class="px-3 py-2 border-2 border-green-600 rounded bg-green-600">Download Now</button>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+
+
+    <script>
+        const btn = document.querySelector('#start');
+        const progress = document.querySelector('#progress');
+        const bar = document.querySelector('#bar');
+        const p = document.querySelector('p');
+
+
+        btn.addEventListener('click', function(dets) {
+            this.textContent = "Downloading....";
+            let count = 10;
+            let set = setInterval(function(){
+                bar.classList.remove('hidden');
+                count++;
+                progress.style.width = count+"%";
+                if(count === 100) {
+                    btn.textContent = "Download";
+                    p.textContent = "Download completed";
+                    clearInterval(set);
+                }
+
+            }, 50);
+        })
+
+    </script>
+</body>
+</html>

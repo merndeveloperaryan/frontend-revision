@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Asyncronous task</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div class="w-full min-h-screen bg-zinc-900 p-5">
+        <button class="p-2 rounded bg-green-600 text-white">Add new user</button>
+        <div id="parent" class="w-full min-h-screen">
+
+        </div>
+    </div>
+
+
+    <script>
+        const parent = document.querySelector("#parent");
+        const button = document.querySelector("button");
+
+        function getData() {
+            try {
+                fetch('https://randomuser.me/api/')
+                    .then(raw => raw.json())
+                    .then(data => {
+                        console.log(data.results[0]);
+                        const {name, email, picture} = data.results[0];
+                                parent.innerHTML += `<div class="w-52 p-4 rounded-lg bg-zinc-800 text-white">
+                    <div class="w-20 h-20 rounded-lg bg-zinc-500 overflow-hidden">
+                        <img src=${picture.large} class="w-full h-full fit-cover" alt="">
+                    </div>
+                    <h2 class="font-bold text-zinc-200">${name.first}</h2>
+                    <p class="text-sm text-zinc-500">${email}</p>
+                    <p class="text-xs">Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, quam beatae? Nobis dicta voluptatibus excepturi repellendus adipisci assumenda eligendi eaque odit quidem! Necessitatibus?</p>
+                </div>`;
+
+
+                    })
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        button.addEventListener('click', function(dets) {
+            getData();
+        })
+
+
+    </script>
+</body>
+
+</html>
